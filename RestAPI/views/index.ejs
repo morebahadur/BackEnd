@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<link rel="stylesheet" href="/style.css" />
+
+<body>
+  <a href="http://localhost:8080/posts/new" class="bg-blue-500 text-white px-4 py-2 rounded mt-4">New Post</a>
+
+  <h1 class="font-bold text-2xl">Quora Posts</h1>
+  <% for(let post of posts){%>
+    <div class="post border-2 border-black py-4 px-4 mt-4 ml-1 rounded-lg shadow-lg w-100">
+      <h3 class="username">@<%= post.username %>
+      </h3>
+      <h4 class="content">
+        <%= post.content %>
+      </h4>
+      <a href="http://localhost:8080/posts/<%=post.id%>" class="text-blue-600 mr-5">see in detail</a>
+      <a href="http://localhost:8080/posts/<%=post.id%>/edit" class="text-blue-600">Edit</a>
+      <form action="/posts/<%=post.id%>?_method=DELETE" method="post" class="inline-block ml-4">
+        <button class="ml-4">Delete Post</button>
+      </form>
+    </div>
+    <%}%>
+</body>
+
+</html>

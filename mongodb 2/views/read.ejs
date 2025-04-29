@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="bg-gray-400 flex flex-row min-h-screen items-center justify-center">
+    <div class=" bg-sky-800 p-10">
+        <div class="mt-5 flex flex-col justify-center items-center">
+            <h1 class="text-3xl tracking-tighter mb-3 text-center ">All Users</h1>
+            <a href="/" class="mb-5 text-white bg-blue-500 px-2 rounded-lg py-1 text-sm">Back to Home</a>
+        </div>
+        <div class="users flex flex-wrap justify-center items-center gap-3">
+            <%if(users.length>0){%>
+                <% users.forEach(function(user){ %>
+                    <div
+                        class="user w-90 h-100 p-5 bg-zinc-300 rounded-2xl flex flex-col items-center justify-center text-center">
+                        <div
+                            class="w-60 h-70 rounded-lg bg-gray-400 flex items-center justify-center overflow-hidden mb-3">
+                            <img src="<%=user.image%>" alt="user image" class="w-60 h-70 rounded-lg object-cover">
+                        </div>
+                        <h3 class="text-2xl">
+                            <%=user.name%>
+                        </h3>
+                        <h5 class="text-znic-500">
+                            <%=user.email%>
+                        </h5>
+                        <div class="flex gap-3 gap-30 text-blue-500 mt-3">
+                            <a href="/edit/<%= user._id%>" class="bg-gray-400 py-1 px-2 rounded-xl ">Edit User</a>
+                            <a href="/delete/<%= user._id %>"
+                                class="text-red-500 bg-gray-400 py-1 px-2 rounded-xl">Delete
+                                User</a>
+                        </div>
+                    </div>
+                    <% })%>
+
+                        <% } else{%>
+                            <h1 class="text-white">User Not Created Yet! </h1>
+                            <% } %>
+
+
+        </div>
+    </div>
+</body>
+
+</html>

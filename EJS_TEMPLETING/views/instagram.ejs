@@ -1,0 +1,40 @@
+<%- include('includes/head.ejs') %>
+
+    <body>
+        <div class="flex gap-10 mt-3">
+            <div>
+                <h1 class="bg-zinc-500 h-20 w-20 text-white flex items-center justify-center rounded-full">
+                    <%=data.name%>
+                </h1>
+
+            </div>
+            <div class="flex flex-col gap-3">
+                <div class="flex flex-row gap-5 text-md font-bold">
+                    <button class="bg-blue-500 px-2 py-1 rounded-xl text-white">follow</button>
+                    <button class="bg-blue-500 px-2 py-1 rounded-xl text-white">message</button>
+                </div>
+                <div>
+                    <P>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</P>
+                </div>
+                <p>followers:<%=data.followers %> &nbsp; &nbsp; following:<%=data.following%>
+                </p>
+            </div>
+        </div>
+        <hr>
+        <h1>Post</h1>
+        <div class="flex flex-wrap gap-5 justify-center items-center mt-5">
+            <%for(let post of data.posts){%>
+                <div class="flex flex-col gap-2 bg-gray-400 rounded-lg p-5">
+                    <img src="<%=post.image%>" alt="some Image"
+                        class=" w-80 h-64 object-cover rounded-lg hover:opacity-90 transition-opacity" loading="lazy">
+                    <p>likes:<%=post.likes %> &nbsp; &nbsp; comments:<%=post.comments%>
+                    </p>
+
+                </div>
+                <%}%>
+        </div>
+        <%- include('includes/footer.ejs')%>
+    </body>
+    <script src="/app.js"></script>
+
+    </html>
