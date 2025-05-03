@@ -33,7 +33,6 @@ app.get('/delete/:id', async (req, res) => {
     // const { id } = req.params;
     // await userModel.findByIdAndDelete(id);
     // res.redirect("/read");
-
     let users = await userModel.findOneAndDelete({ _id: req.params.id });
     res.redirect("/read");
 })
