@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Chat</title>
+</head>
+<link rel="stylesheet" href="style.css">
+
+<body
+    style="background-color: gray;display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;">
+    <h1>New Chat</h1>
+    <form action="/chats" method="POST" style="display: flex; flex-direction: column; gap: 10px; ">
+        <input type="text" name="from" placeholder="who are you?" required>
+        <textarea name="message" id="message" placeholder="write message here" required></textarea>
+        <input type="text" name="to" placeholder="who is receiver" required>
+        <button type="submit">Create Chat</button>
+    </form>
+
+    <footer style="margin-top: 20px;">
+        <p>&copy; 2023 Chat Application</p>
+    </footer>
+</body>
+
+</html>
