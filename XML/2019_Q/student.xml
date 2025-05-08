@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="style.xsl" version="1.0"?> 
+<!DOCTYPE college[
+<!ELEMENT college (student+)>
+<!ELEMENT student (name,address,phone,website)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT address (#PCDATA)>
+<!ELEMENT phone (#PCDATA)>
+<!ELEMENT website (#PCDATA)>
+]>
+
+<college>
+    <student>
+        <name>Dipak Tamang</name>
+        <address>Dhading</address>
+        <phone>9810645472</phone>
+        <website>http://dipaktamang1.com.np</website>
+    </student>
+</college>

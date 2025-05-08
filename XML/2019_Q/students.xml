@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="style.xsl"?>
+<college xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <student>
+        <name>John Doe</name>
+        <address>123 Main St</address>
+        <phone>555-0123</phone>
+        <website>http://example.com</website>
+    </student>
+</college>
