@@ -1,69 +1,68 @@
 <% layout("/layout/boilerplate")%>
 
-  <body>
-    <div class="container py-5">
-      <div class="card shadow-lg mx-auto rounded-3" style="max-width: 600px;">
-        <img src="<%= listing.image.url %>" class="card-img-top object-fit-cover rounded-top-3"
-          alt="<%= listing.title %>" style="height: 500px;">
+<body>
+  <div class="container py-5">
+    <div class="card shadow-lg mx-auto rounded-3" style="max-width: 600px;">
+      <img src="<%= listing.image.url %>" class="card-img-top object-fit-cover rounded-top-3" alt="<%= listing.title %>" style="height: 500px;">
 
-        <div class="card-body p-4">
-          <h2 class="card-title display-6 fw-bold text-primary mb-4">
-            <%= listing.title %>
-          </h2>
-          <p class="card-text fs-5 text-secondary mb-4">
-            <%= listing.description %>
-          </p>
+      <div class="card-body p-4">
+        <h2 class="card-title display-6 fw-bold text-primary mb-4">
+          <%= listing.title %>
+        </h2>
+        <p class="card-text fs-5 text-secondary mb-4">
+          <%= listing.description %>
+        </p>
 
-          <div class="d-flex flex-column align-items-start gap-2 mb-4">
-            <div>
-              <p class="card-text fs-5">
-                <i class="fas fa-map-marker-alt text-danger me-2"></i>
-                <span class="fw-semibold">
-                  <%= listing.location %>
-                </span>,
-                <%= listing.country %>
-              </p>
-            </div>
-            <div>
-              <p class="card-text fs-4 fw-bold text-success mb-2">
-                <i class="fas fa-rupee-sign me-2"></i>
-                ₹<%= typeof listing.price==='number' ? listing.price.toLocaleString("en-IN") : listing.price %>
-              </p>
-            </div>
-
+        <div class="d-flex flex-column align-items-start gap-2 mb-4">
+          <div>
+            <p class="card-text fs-5">
+              <i class="fas fa-map-marker-alt text-danger me-2"></i>
+              <span class="fw-semibold">
+                <%= listing.location %>
+              </span>,
+              <%= listing.country %>
+            </p>
+          </div>
+          <div>
+            <p class="card-text fs-4 fw-bold text-success mb-2">
+              <i class="fas fa-rupee-sign me-2"></i>
+              ₹<%= typeof listing.price==='number' ? listing.price.toLocaleString("en-IN") : listing.price %>
+            </p>
           </div>
 
-          <div class="d-flex flex-column flex-sm-row gap-3">
-            <a href="/listings" class="btn btn-outline-primary btn-lg flex-grow-1 hover-scale">
-              <i class="fas fa-arrow-left me-2"></i>All Listings
-            </a>
-            <a href="/listings/<%= listing._id %>/edit" class="btn btn-outline-success btn-lg flex-grow-1 hover-scale">
-              <i class="fas fa-edit me-2"></i>Edit
-            </a>
-            <form class="flex-grow-1" action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
-              <button class="btn btn-outline-danger btn-lg w-100 hover-scale">
-                <i class="fas fa-trash-alt me-2"></i>Delete
-              </button>
-            </form>
-          </div>
+        </div>
+
+        <div class="d-flex flex-column flex-sm-row gap-3">
+          <a href="/listings" class="btn btn-outline-primary btn-lg flex-grow-1 hover-scale">
+            <i class="fas fa-arrow-left me-2"></i>All Listings
+          </a>
+          <a href="/listings/<%= listing._id %>/edit" class="btn btn-outline-success btn-lg flex-grow-1 hover-scale">
+            <i class="fas fa-edit me-2"></i>Edit
+          </a>
+          <form class="flex-grow-1" action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
+            <button class="btn btn-outline-danger btn-lg w-100 hover-scale">
+              <i class="fas fa-trash-alt me-2"></i>Delete
+            </button>
+          </form>
         </div>
       </div>
     </div>
+  </div>
 
-    <style>
-      .hover-scale {
-        transition: transform 0.2s ease;
-      }
+  <style>
+    .hover-scale {
+      transition: transform 0.2s ease;
+    }
 
-      .hover-scale:hover {
-        transform: scale(1.02);
-      }
-    </style>
+    .hover-scale:hover {
+      transform: scale(1.02);
+    }
+  </style>
 
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 
-  </html>
+</html>
