@@ -1,5 +1,12 @@
 body {
     font-family: 'plus jakarta Sans', sans-serif !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    flex: 1;
 }
 
 .navbar {
@@ -10,6 +17,18 @@ body {
 .fa-compass {
     color: #fe424d;
     font-size: 2rem;
+}
+
+.add-button {
+    background-color: #fe424d !important;
+    font-weight: bold;
+    border: none indianred !important;
+}
+
+.edit-button {
+    background-color: #fe424d !important;
+    font-weight: bold;
+    border: none indianred !important;
 }
 
 .nav-link {
@@ -73,12 +92,12 @@ body {
     font-weight: 400;
 }
 
-.row {
+/* .row {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: space-evenly;
-}
+} */
 
 .listing-link {
     text-decoration: none;
