@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="student">  <!--  this student element -->
+    <xs:complexType> <!-- the element type is complex -->
+      <xs:sequence>  <!-- input are In the order of sequence-->
+        <xs:element name="name" type="xs:string"/> <!-- name element with only one existence -->
+        <xs:element name="address" maxOccurs="unbounded"> <!-- Address element with type complextype -->
+          <xs:complexType>
+            <xs:simpleContent>
+              <xs:extension base="xs:string">
+                <xs:attribute name="type" use="required">
+                  <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                      <xs:enumeration value="permanent"/>
+                      <xs:enumeration value="temporary"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                </xs:attribute>
+              </xs:extension>
+            </xs:simpleContent>
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="phone">
+          <xs:simpleType>
+            <xs:restriction base="xs:integer">
+              <xs:pattern value="\d{10}"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+
+        <xs:element name="website" type="xs:anyURI"/>
+
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

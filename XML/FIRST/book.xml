@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>  
 <!DOCTYPE bookstore[
 <!ELEMENT bookstore (book+)>
-<!ELEMENT book (title,author,year,price)>
+<!ELEMENT book (title+,author,year,price)>
 <!ELEMENT title (#PCDATA)>
 <!ATTLIST title lang CDATA "en" >
 <!ELEMENT author (#PCDATA)>

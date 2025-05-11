@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="student.xsl"?>
+<student xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="schema.xsd">  
+  <name>John Doe</name>
+  <address type="permanent">123 Main Street </address>
+  <address type="temporary">Dorm 5, College Campus</address>
+  <phone>9876543210</phone>
+  <website>http://johndoe.example.com</website>
+</student>

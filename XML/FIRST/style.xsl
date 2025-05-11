@@ -34,6 +34,7 @@
                             <td><xsl:value-of select="price"/></td>
                         </tr>
                     </xsl:otherwise>
+                    
                 </xsl:choose>
                 
             </xsl:for-each>
@@ -42,3 +43,5 @@
 </html>
 </xsl:template>
 </xsl:stylesheet>
+
+
