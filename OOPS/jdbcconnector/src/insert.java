@@ -3,7 +3,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class App {
+public class insert {
     public static void main(String[] args) {
         try {
             // Load the JDBC driver
@@ -14,11 +14,11 @@ public class App {
             // PreparedStatement ps = con.prepareStatement("INSERT INTO register
             // Values('pritika','pritika@gmail.com','pritika1234', 'female', 'kathmandu')");
             PreparedStatement ps = con.prepareStatement("INSERT INTO register Values(?,?,?,?,?)");
-            ps.setString(1, "garima");
-            ps.setString(2, "garima@gmail.com");
-            ps.setString(3, "garima123");
-            ps.setString(4, "female");
-            ps.setString(5, "kathmandu");
+            ps.setString(1, "suru");
+            ps.setString(2, "suru@gmail.com");
+            ps.setString(3, "Suru123");
+            ps.setString(4, "male");
+            ps.setString(5, "Dhading");
             int i = ps.executeUpdate();
             if (i > 0) {
                 System.out.println("successfull");
