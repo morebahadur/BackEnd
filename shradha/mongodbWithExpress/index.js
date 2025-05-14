@@ -39,11 +39,17 @@ app.get("/", (req, res) => {
   res.send("root is working!");
 });
 
+function asyncWrap(fn) {
+  return function (req, res, next) {
+    fn(req, res, next).catch((err) => next(err));
+  }
+}
+
 //showing chats Route
-app.get("/chats", async (req, res) => {
+app.get("/chats", asyncWrap(async (req, res) => {
   const chats = await Chat.find();
   res.render("chats.ejs", { chats });
-});
+}));
 
 //creating new chat Route
 app.get("/chats/new", (req, res) => {
