@@ -5,6 +5,9 @@ const Listing = require("./models/listing.js");
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
+const wrapAsync = require("./utils/wrapAsync.js");
+const ExpressError = require("./utils/ExpressError.js");
+const { listingSchema } = require("./schema.js");
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
 main()
@@ -39,12 +42,13 @@ app.get("/listings/new", async (req, res) => {
   res.render("listings/new");
 });
 //create the new post
-app.post("/listings", async (req, res) => {
-  // console.log(req.body.listing);
+app.post("/listings", wrapAsync(async (req, res, next) => {
+  let result = listingSchema.Validate(req.body);
+  console.log(result);
   const newListing = new Listing(req.body.listing);
   await newListing.save();
   res.redirect("/listings");
-});
+}));
 
 //show particular id detail
 app.get("/listings/:id", async (req, res) => {
@@ -86,6 +90,19 @@ app.delete("/listings/:id", async (req, res) => {
 //   console.log("sample was saved!");
 //   res.send("successful test");
 // });
+// app.use((err, req, res, next) => {
+//   console.log("in valid form submition!");
+//   res.send("something went wrong!");
+// })
+// app.all("*", (req, res, next) => {
+//   next(new ExpressError(404, "page not found!"));
+// });
+
+app.use((err, req, res, next) => {
+  let { status = 500, message } = err;
+  // res.status(status).send(message);
+  res.render("error", { message });
+})
 
 app.listen(8080, (req, res) => {
   console.log("i am listenning port 8080!");
