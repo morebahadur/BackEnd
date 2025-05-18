@@ -25,6 +25,17 @@ app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "public")));
 
+//validating the schema
+const validateListing = (req, res, next) => {
+  let { error } = listingSchema.validate(req.body);
+  if (error) {
+    let errMsg = error.details.map((el) => el.message).join(",");
+    console.log(errMsg);
+    throw new ExpressError(400, errMsg);
+  } else {
+    next();
+  }
+}
 async function main() {
   await mongoose.connect(MONGO_URL);
 }
@@ -42,9 +53,7 @@ app.get("/listings/new", async (req, res) => {
   res.render("listings/new");
 });
 //create the new post
-app.post("/listings", wrapAsync(async (req, res, next) => {
-  let result = listingSchema.Validate(req.body);
-  console.log(result);
+app.post("/listings", validateListing, wrapAsync(async (req, res, next) => {
   const newListing = new Listing(req.body.listing);
   await newListing.save();
   res.redirect("/listings");
@@ -66,7 +75,7 @@ app.get("/listings/:id/edit", async (req, res) => {
 });
 
 //update the post
-app.put("/listings/:id", async (req, res) => {
+app.put("/listings/:id", validateListing, async (req, res) => {
   const { id } = req.params;
   await Listing.findByIdAndUpdate(id, req.body.listing);
   res.redirect("/listings");
@@ -101,6 +110,7 @@ app.delete("/listings/:id", async (req, res) => {
 app.use((err, req, res, next) => {
   let { status = 500, message } = err;
   // res.status(status).send(message);
+  console.log(err);
   res.render("error", { message });
 })
 
