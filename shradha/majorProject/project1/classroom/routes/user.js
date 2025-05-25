@@ -1,17 +1,24 @@
 const express = require("express");
+const router = express.Router();
+
+
 //index - users
-app.get("/users", (req, res) => {
+router.get("/", (req, res) => {
     res.send("GET for users");
-});
+}); 
+
 //show-users
-app.get("/users/:id", (req, res) => {
-    res.send("GET for users with id");
+router.get("/:id", (req, res) => {
+    res.send("GET for users id");
 });
+
 //post-users
-app.post("/users", (req, res) => {
+router.post("/", (req, res) => {
     res.send("Post for users");
 });
+
 //delete-users
-app.delete("/users/:id", (req, res) => {
-    res.send("Delete for users");
+router.delete("/:id", (req, res) => {
+    res.send("Delete for users id");
 });
+module.exports = router;
