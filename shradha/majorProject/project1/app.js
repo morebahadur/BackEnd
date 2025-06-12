@@ -7,7 +7,9 @@ const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js");
 const session = require("express-session");
 const flash = require("connect-flash");
-
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const User = require("./models/user.js");
 
 const listingRoutes = require("./routes/listing.js");
 const reviews = require("./routes/review.js");
@@ -29,14 +31,14 @@ app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "public")));
 
-const sessionOptions ={
+const sessionOptions = {
   secret: "mysupersecret",
   resave: false,
   saveUninitialized: true,
-  cookie:{
+  cookie: {
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7, // 1 week
     maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
-    httpOnly: true, 
+    httpOnly: true,
   }
 }
 
@@ -47,7 +49,13 @@ app.get("/", (req, res) => {
 app.use(session(sessionOptions));
 app.use(flash());
 
-app.use((req,res,next)=>{
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser()); 
+passport.deserializeUser(User.deserializeUser());
+
+app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
   next();
@@ -67,7 +75,7 @@ async function main() {
 
 
 app.use("/listings", listingRoutes);
-app.use("/listings/:id/reviews",reviews);
+app.use("/listings/:id/reviews", reviews);
 
 
 app.use((err, req, res, next) => {
