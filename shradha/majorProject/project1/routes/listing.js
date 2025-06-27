@@ -3,6 +3,8 @@ const router = express.Router();
 const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressError = require("../utils/ExpressError.js");
 const { listingSchema, reviewSchema } = require("../schema.js");
+const { isLogedin } = require("../middleware.js");
+
 const Listing = require("../models/listing.js");
 
 //validating the schema
@@ -22,8 +24,9 @@ router.get("/", async (req, res) => {
   const allListings = await Listing.find({});
   res.render("listings/index.ejs", { allListings });
 });
+
 //New post
-router.get("/new", async (req, res) => {
+router.get("/new", isLogedin, async (req, res) => {
   res.render("listings/new");
 });
 
@@ -39,19 +42,19 @@ router.post("/", validateListing, wrapAsync(async (req, res, next) => {
 router.get("/:id", async (req, res) => {
   let { id } = req.params;
   const listing = await Listing.findById(id).populate("reviews");
-  if(!listing){
-    req.flash("error","Listing you requested for not found!");
+  if (!listing) {
+    req.flash("error", "Listing you requested for not found!");
     return res.redirect("/listings");
   }
   res.render("listings/show.ejs", { listing: listing });
 });
 
 //edit the post
-router.get("/:id/edit", async (req, res) => {
+router.get("/:id/edit",isLogedin, async (req, res) => {
   const { id } = req.params;
   const listing = await Listing.findById(id);
   // console.log(listing.image.url);
-  if(!listing) {
+  if (!listing) {
     req.flash("error", "Listing you requested for not found for edit!");
     return res.redirect("/listings");
   }
@@ -59,14 +62,14 @@ router.get("/:id/edit", async (req, res) => {
 });
 
 //update the post
-router.put("/:id", validateListing, async (req, res) => {
+router.put("/:id",isLogedin, validateListing, async (req, res) => {
   const { id } = req.params;
   await Listing.findByIdAndUpdate(id, req.body.listing);
   req.flash("success", "updated the listing!");
   res.redirect("/listings");
 });
 //delete the post
-router.delete("/:id", async (req, res) => {
+router.delete("/:id",isLogedin, async (req, res) => {
   const { id } = req.params;
   await Listing.findByIdAndDelete(id, req.body.listing);
   req.flash("success", "deleted the listing!");

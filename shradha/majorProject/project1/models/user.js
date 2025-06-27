@@ -1,32 +1,13 @@
 const mongoose = require('mongoose');
-const sechema = mongoose.Schema;
+const Schema = mongoose.Schema;
 const passwordLocalMongoose = require('passport-local-mongoose');
-const userSchema = new sechema({
-    username: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    password: {
-        type: String,
-        required: true
-    },
+const userSchema = new Schema({
     email: {
         type: String,
         required: true,
-        unique: true
     },
-    role: {
-        type: String,
-        enum: ['student', 'teacher', 'admin'],
-        default: 'student'
-    }
 });
 
-userSchema.plugin(passwordLocalMongoose, {
-    usernameField: 'email',
-    hashField: 'password',
-    saltField: 'salt'
-});
+userSchema.plugin(passwordLocalMongoose);
 const User = mongoose.model('User', userSchema);
 module.exports = User;
